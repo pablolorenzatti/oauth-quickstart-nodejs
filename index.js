@@ -215,5 +215,33 @@ app.get('/error', (req, res) => {
   res.end();
 });
 
+
+
+
+app.post('/webhook', (req, res) => {
+  const payload = req.body;
+  console.log('Received webhook payload:', payload);
+
+  // Process the webhook payload
+  // Example: check the type of the event and take corresponding actions
+  if (payload && payload.eventType) {
+      switch (payload.eventType) {
+          case 'contact_created':
+              console.log('A new contact was created:', payload.contact);
+              break;
+          case 'contact_updated':
+              console.log('A contact was updated:', payload.contact);
+              break;
+          // Add more cases to handle other types of events
+          default:
+              console.log('Unknown event type:', payload.eventType);
+      }
+  }
+
+  // Send a 200 OK response to acknowledge the receipt of the webhook
+  res.status(200).send('Webhook received');
+});
+
+
 app.listen(PORT, () => console.log(`=== Starting your app on http://localhost:${PORT} ===`));
 opn(`http://localhost:${PORT}`);
