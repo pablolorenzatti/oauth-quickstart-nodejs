@@ -122,6 +122,7 @@ app.get('/', (req, res) => {
   res.write(`<h2>HubSpot OAuth 2.0 Quickstart App</h2>`);
   if (isAuthorized(req.sessionID)) {
     res.write(`<p>Aplicación instalada correctamente</p>`);
+    console.log(SESSION_SECRET);
   } else {
     res.write(`<a href="/install"><h3>Install the app</h3></a>`);
   }
